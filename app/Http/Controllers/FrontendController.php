@@ -60,8 +60,8 @@ class FrontendController extends Controller
     {
     	$tag = Tag::find($id);
 
-    	return view('tag')->with('tag' , $tag)
-    					  ->with('title','$tag->tag')
+    	return view('tag')->with('tag' ,$tag)
+    					  ->with('title',$tag->tag)
     					  ->with('setting', Setting::first())
     					  ->with('categories', Category::take(5)->get());	
     }

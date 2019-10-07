@@ -85,17 +85,18 @@ class ProfilesController extends Controller
         if($request->hasFile('avatar'))
         {
             $avatar = $request->avatar;
-
-            $avatar_new_name = time() . $avatar->getClientOriginalName();
-            $avatar->move('uploads/avatars',$avatar_new_name);
+            $avatar_new_name = time(). $avatar->getClientOriginalName();
+            $avatar->move('uploads/avatars', $avatar_new_name);
             $user->profile->avatar = 'uploads/avatars/'. $avatar_new_name;
             $user->profile->save();
+            
         }
 
         $user->name = $request->name;
         $user->email= $request->email;
         $user->profile->facebook = $request->facebook;
         $user->profile->youtube = $request->youtube;
+        $user->profile->about = $request->about;
         $user->save();
         $user->profile->save();
 
@@ -103,6 +104,7 @@ class ProfilesController extends Controller
         {
             $user->password = bcrypt($request->password);
         }
+
         Session::flash('success','Account profile updated');
         return redirect()->back();
        

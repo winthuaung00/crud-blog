@@ -8,6 +8,7 @@ use App\Category;
 use App\Post;
 use App\Tag;
 use Session;
+use Auth;
 
 class PostsController extends Controller
 {
@@ -70,7 +71,8 @@ class PostsController extends Controller
             'content'=> $request->content ,
             'featured'=> 'uploads/posts/'.$featured_new_name ,
             'category_id' => $request->category_id,
-            'slug' => str_slug($request->title)
+            'slug' => str_slug($request->title),
+            'user_id' => Auth::id()
         ]);
 
         $post->tags()->attach($request->tags);
@@ -128,8 +130,8 @@ class PostsController extends Controller
         {
             $featured = $request->featured;
             $featured_new_name = time().$featured->getClientOriginalName();
-            $featured->move('uploads/posts',$featured_new_name);
-            $post->featured = 'uploads/posts/'.$featured_new_name;
+            $featured->move('uploads/posts/', $featured_new_name);
+            $post->featured = 'uploads/posts/'. $featured_new_name;
         }
         $post->title = $request->title;
         $post->content = $request->content;

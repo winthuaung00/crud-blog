@@ -10,6 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::post('/subscribe',function(){
+
+	$email = request('email');
+
+	Newsletter::subscribe($email);
+
+	Session::flash('subscribed','Successfully subscribed');
+	return redirect()->back();
+});
 
 Route::get('/test',function(){
 
@@ -24,13 +33,13 @@ Route::get('/',[
 
 Route::get('/results', function(){
 
-	$posts= \App\Post::where('title','like',  '%' . request('query') . '%')->get();
+	$posts= \App\Post::where('title','like', '%'.request('query').'%')->get();
 
-	return view('results')->with('posts',$posts)
+	return view('results')->with('posts', $posts)
 						  ->with('title','Search results : ' . request('query'))
-    					  ->with('settings', \App\Setting::first())
-    					  ->with('categories', \App\Category::take(5)->get())
-    					  ->with('query',request('query'));
+    					  ->with('setting',\App\Setting::first())
+    					  ->with('categories',\App\Category::take(5)->get())
+    					  ->with('query', request('query'));
 });
 
 Route::get('post/{slug}', [
@@ -58,7 +67,7 @@ Auth::routes();
 
 Route::group(['prefix'=>'admin','middleware' => 'auth'] ,function(){
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/dashboard/', 'HomeController@index')->name('home');
 
 Route::get('/posts/create',[
 

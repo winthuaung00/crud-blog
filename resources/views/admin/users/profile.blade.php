@@ -36,12 +36,12 @@
 
 			<div class="form-group">
 				<label for="name"> New Password </label>
-				<input type="password" name="password" class="form-control">
+				<input type="password" name="password"  class="form-control"> 
 			</div>
 
 			<div class="form-group">
-				<label for="name"> Upload New photo </label>
-				<input type="file" name="avatar" class="form-control">
+				<label for="name"> Upload  New Avatar </label>
+				<input type="file" name="avatar" class="form-control" >
 			</div>
 
 			<div class="form-group">
@@ -55,15 +55,15 @@
 			</div>
 
 			<div class="form-group">
-				<label for="name"> About You</label>
-				<textarea name="about" id="about" cols="10" rows="6" class="form-control"> {{$user->profile->about}}</textarea>
+				<label for="about"> About You</label>
+				<textarea name="about" id="about" cols="10" rows="6" class="form-control"> {{$user->profile->about}} </textarea>
 			</div>
 
 
 
 			<div class="form-group">
 				<button class="btn btn-success" type="submit"> 
-					Add user
+					Update Profile
 				</button>
 			</div>
 
